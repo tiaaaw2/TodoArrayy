@@ -1,51 +1,244 @@
-/* delete modal */
-.popup-content {
-  height: 160px;
-  width: 300px;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 30px;
-  position: relative;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-top: 15px ;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
-.popup-content input{
-    height: 40px;
-    margin-top: -12px;
+  body {
+    background: #f5efe7;
+    font-size: 16px;
+    color: #333;
+    display: flex;
+    justify-content: center; 
+    min-height: 100vh;
+    padding: 60px; 
 }
-/* edit popup */
-.popup-edit, .popup-delete{
-  padding: 5px 13px;
-  background: #194078;
+.todo-app {
+    /* kotak */
+    width: 400px; 
+    height: 155px; 
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+.todo-app h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3e5879;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    height: 45px; 
+    box-sizing: border-box;
+    overflow: hidden; 
+    white-space: nowrap;
+    margin-bottom: 7px; 
+}
+  button {
+    padding: 10px 20px;
+    background: #3e5879;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 7px;
+}
+  
+  button:hover {
+    background: #2d4260;
+}
+/* end input */
+
+/* kotak 2 output */
+.todos-wrapper {
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  
+  .todos-title {
+    color: #3e5879;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .todos-container {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 5px;
+  }
+
+  /* Individual todo item */
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 4px solid #3e5879;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .todo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .todo-content {
+    flex: 1;
+    margin-right: 15px;
+  }
+  
+  .todo-text {
+    font-size: 1rem;
+    color: #333;
+    word-break: break-word;
+  }
+  
+  .todo-actions {
+    display: flex;
+    gap: 8px;
+  }
+  /* Button styles */
+.edit-btn, .delete-btn {
+    padding: 8px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .edit-btn {
+    background: #194078;
+    color: #fff;
+  }
+  
+  .edit-btn:hover {
+    background: #2860b5;
+  }
+  
+  .delete-btn {
+    background: #831717;
+    color: #fff;
+  }
+  
+  .delete-btn:hover {
+    background: #a82020;
+  }
+  
+  /* Icon styles */
+  .fas {
+    font-size: 0.9rem;
+  }
+  .todo-checkbox {
+    margin-right: 12px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #3e5879;
+  }
+  
+  /* Completed todo styling */
+  .todo-item.completed {
+    background: #f0f0f0;
+    border-left: 4px solid #28a745;
+    opacity: 0.8;
+  }
+  .todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #6c757d;
+  }
+  
+  /* Stats styling */
+  .todos-stats {
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }  
+/* end */
+  
+
+.popup-content{
+    width: 400px; 
+    height: 200px; 
+    background: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0.1, 0.1);
+    display: none;
+    flex-direction: column;
+}
+h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #3e5879;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn{
+    margin-bottom: 5px;
+    background-color: #fff;
+    border: none;
+    cursor: pointer;
+    text-align: right;
+}
+
+/* DELETE */
+.delete-title{
+    margin: 0; 
+    color: #3e5879;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.modal-delete{
+  padding: 10px 20px;
+  margin-bottom: 5px;
+  background: #3e5879;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  height: 30px;
-  margin-top: 10px;
-  text-align: center;
+  height: 35px; 
+  }
+.modal-cancel{
+  padding: 10px 20px;
+  background: #3e5879;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 35px; 
 }
-.edit-title{
-  color: #194078;
-  margin-bottom: 10px;
-  text-align: center;
-  font-size: 20px;
-  margin-top: -40px;
+p{
+   font-size: medium; 
 }
-.close{
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  background: #fff;
-  width: 20px; 
-  height: 20px;
-  border-radius: 50%;
-  box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
-  cursor: pointer; 
-}
-.close-btn{
-    text-align: right;
-}
+  
