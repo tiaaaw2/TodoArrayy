@@ -156,67 +156,110 @@ input {
 /* end */
   
 /* MODAL STYLE */
-.popup-content{
-  
-    /* width: 100%;
-    max-width: 400px;
-    height: 210px; 
-    background: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0.1, 0.1);
-    display: none;
-    flex-direction: column; */
-}
-h3 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #3e5879;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-  /* modal close button */
-.close-btn{    
-    margin-bottom: 5px;
-    color: #000000;
-    border: none;
-    cursor: pointer;
-    text-align: right;
-    background: none;
+.popup-content {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Ensures it stays on top */
 }
 
-/* MODAL DELETE */
-.delete-title{
-    margin: 0; 
-    color: #3e5879;
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+/* Modal boxes */
+#edit-modal, #delete-modal {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 30px 50px;
+  width: 400px;
+  max-width: 600px;
+  height: auto;
+  text-align: center;
+  position: relative;
 }
-    /* button delete dan cance di modal delete */
-.modal-delete{
+
+/* Close button for modal */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  background: none;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Title for modals */
+#edit-modal h3, #delete-modal h3 {
+  margin: 0;
+  color: #3e5879;
+  text-align: left;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Edit modal input */
+#edit-modal input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  height: 45px;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 15px; /* Space between inputs */
+  width: 100%; /* Full width of the modal */
+}
+
+/* Modal paragraph (for delete modal description) */
+#delete-modal p {
+  opacity: 0.7;
+  font-size: 15px;
+  margin-bottom: 15px; /* Add margin for spacing */
+}
+
+/* Delete modal title */
+.delete-title {
+  margin: 0;
+  color: #3e5879;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-weight: 600;
+}
+
+/* Modal action buttons */
+.modal-delete, .modal-cancel {
   padding: 10px 20px;
-  margin-bottom: 5px;
   background: #3e5879;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  height: 35px; 
-  }
-.modal-cancel{
-  padding: 10px 20px;
-  background: #3e5879;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  height: 35px; 
+  height: 35px;
+  margin-top: 10px; /* Add margin between buttons */
+  width: 100%; /* Make buttons full-width within the modal */
+  font-size: 16px;
 }
-p{
-   font-size: medium; 
+
+/* Style for cancel button in delete modal */
+.modal-cancel {
+  background: #f1f1f1;
+  color: #3e5879;
 }
-  
+
+/* Basic paragraph style */
+p {
+  font-size: medium;
+  color: #333;
+}
