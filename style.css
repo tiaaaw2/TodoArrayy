@@ -122,6 +122,10 @@ input {
     display: flex;
     gap: 8px;
 }
+/* checkbox */
+.completed-text{
+  text-decoration: line-through;
+}
 
 /* Button styles */
 .edit-btn, .delete-btn {
@@ -161,7 +165,7 @@ input {
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 200px;
   width: 100vw;
   display: none;
   justify-content: center;
@@ -169,33 +173,19 @@ input {
   z-index: 500; 
 }
 
-/* Modal kotak */
-/* #edit-modal, #delete-modal {
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  padding: 30px 50px;
-  width: 400px;
-  max-width: 600px;
-  height: auto;
-  text-align: center;
-  position: relative;
-} */
-
 #edit-modal, #delete-modal {
   background: #fff;
-  border-radius: 10px; /* Tambahkan radius */
+  border-radius: 10px; 
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   padding: 30px;
-  width: 90%; /* Responsif untuk layar kecil */
-  max-width: 400px; /* Batas lebar maksimal */
-  height: auto; /* Sesuai konten */
+  width: 90%; 
+  max-width: 400px; 
+  height: auto; 
   text-align: center;
-  position: relative; /* Untuk elemen close button */
+  position: relative; 
 }
-
 .popup-content.active {
-  display: flex; /* Tampilkan modal */
+  display: flex; 
 }
 
 
@@ -203,7 +193,7 @@ input {
 /* Close button  modal */
 .close-btn {
   position: absolute;
-  top: 10px;
+  top: 9px;
   right: 10px;
   color: #000000;
   border: none;
@@ -231,20 +221,38 @@ input {
   font-weight: 600;
 }
 
-/* Edit modal input */
-#edit-modal input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  height: 45px;
-  box-sizing: border-box;
-  overflow: hidden;
-  white-space: nowrap;
-  margin-bottom: 15px; 
-  width: 100%; 
+/* Edit modal */
+#edit-modal1 {
+  display: none; 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+  width: 400px; 
+  padding: 30px; 
+  z-index: 1000;
+  text-align: center; 
 }
+
+#edit-modal1 h2 {
+  font-size: 58px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333; 
+}
+
+#edit-modal1 input {
+  width: 100%;
+  padding: 10px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px; 
+  box-sizing: border-box;
+}
+/* END EDIT MODAL */
 
 /* Modal delete paraagraf */
 #delete-modal p {
@@ -308,37 +316,9 @@ input {
   font-size: 16px;
 }
 
-/* Basic paragraph style */
 p {
   font-size: medium;
   color: #333;
-}
-
-
-/* Gaya untuk modal */
-#edit-modal1 {
-  display: none; /* Modal tersembunyi secara default */
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  width: 300px;
-  padding: 20px;
-  z-index: 1000;
-}
-
-/* Tombol tutup */
-.close-btn1 {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  position: absolute;
-  top: 10px;
-  right: 10px;
 }
 
 /* Latar belakang overlay */

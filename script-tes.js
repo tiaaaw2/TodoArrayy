@@ -14,7 +14,9 @@ function tampilkanList() {
         li.innerHTML = `
             <div class="todo-item">
                 <div class="todo-content">
-                    ${todo.title}
+                    <input type="checkbox" id="check-${todo.id}" class="check-input"> 
+                    <span>${todo.title}</span>
+
                 </div>
                 <div class="todo-actions">
                     <button class="edit-btn" onclick="openEditModal(${todo.id})">
@@ -26,6 +28,15 @@ function tampilkanList() {
                 </div>
             </div>
         `;
+
+        // ini checkboxes
+        const inputCheckbox = li.querySelector('.check-input');  // ambil checkbox di dalam  li
+        inputCheckbox.addEventListener('change', function() {
+            let todoSpan = inputCheckbox.nextElementSibling; 
+            todoSpan.classList.toggle('completed-text');  
+        });
+        // end checkboxes
+        
         listContainer.appendChild(li);
 
         li.addEventListener('click', function() {
@@ -48,7 +59,7 @@ function add() {
 
     todos.push(newToDo); // Save in array
     tampilkanList(); // Re-render the list
-    document.getElementById('input').value = ''; // Clear input
+    document.getElementById('input').value = ''; // clear input (setelah menginput, inputannya langsung kosong)
 }
 
 // Open the edit modal
@@ -130,6 +141,6 @@ function deleteToDo() {
         todoElement.remove();
     }
 
-    
+
 }
 
