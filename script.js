@@ -1,23 +1,58 @@
 const input = document.getElementById("input");
-let todo = []; //menampung nilainya
+let todos = []; //menampung nilainya
 let selectedId = null;
 const btnEdit = document.getElementById("edit-btn");
 
+// const todos = [
+//     { id: 1, title: 'Test Task 1', complete: false },
+// ];
+
+tampilkanList();
+
+// menampilkan list todo
+function tampilkanList() {
+    todos.forEach(todo =>  {
+        console.log(todo.id);
+        console.log(todo.title);
+        let value = document.getElementById('input').value
+        let li = document.createElement('li')
+        li.id = `todo-${todo.id}`;
+        li.innerHTML = `
+                <div class="todo-item" id="">
+                        <div class="todo-content">
+                            ${todo.title} 
+                        </div>
+                        <div class="todo-actions">
+                            <button id="edit-btn" class="edit-btn" data-index="0" onclick="openEditModal(${todo.length+1})">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="delete-btn" data-index="0" onclick="openDeleteModal(${todo.length+1})">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                
+        `
+        document.getElementById('listTodo').appendChild(li)
+    });
+}
+
 // tambah data
 function add(){
+    let id = todos.length+1;
     let value = document.getElementById('input').value
     let li = document.createElement('li')
-    li.id = `todo-${todo.length+1}`;
+    li.id = `todo-${id}`;
     li.innerHTML = `
             <div class="todo-item" id="">
                     <div class="todo-content">
                      ${value} 
                     </div>
                     <div class="todo-actions">
-                        <button id="edit-btn" class="edit-btn" data-index="0" onclick="openEditModal(${todo.length+1})">
+                        <button id="edit-btn" class="edit-btn" data-index="0" onclick="openEditModal(${id})">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="delete-btn" data-index="0" onclick="openDeleteModal(${todo.length+1})">
+                        <button class="delete-btn" data-index="0" onclick="openDeleteModal(${id})">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                    </div>
@@ -30,59 +65,82 @@ function add(){
     li.addEventListener('click', function(){
         li.classList.toggle('completed')
     })
-
+    
     createToDo = {
-        id : todo.length + 1, //unutk membrikan kode unik natara todo satu dan todo lainnya
+        id : id,
         title : value,
         complete : false,
     }
 
-    todo.push(createToDo);
+    todos.push(createToDo); // simpan data di array
+    console.log(todos);
 }
 
 function openEditModal(id) {
     const modal = document.getElementById("edit-modal");
     modal.style.display = "block";
     const input = document.getElementById("edit-input");
-    input.value = todo.find((v)=> v.id === id).title;
+    input.value = todos.find((v)=> v.id === id).title;
     selectedId = id;
 }
+
 function closeEditModal(id) {
     const modal = document.getElementById("edit-modal");
     modal.style.display = "none";
     selectedId=null;
-
 }
 
 function submitEditModal() {
     let value = document.getElementById('edit-input').value
     // todo[selectedId] = value;
-
-    // untuk mengedit
-    todo = todo.map((v)=> {
-        if(v.id === selectedId){
-            return {...v, title: value}
-        }
-        return v
+    updateToDo = {
+        id : selectedId,
+        title : value,
+        complete : false,
     }
 
-);
-    const elementToDo = document.getElementById(`todo-${selectedId}`)
-    elementToDo.querySelector('.todo-title').innerText = value;
-    closeEditModal()
+    // untuk mengedit
+    // todos = todos.map((v)=> {
+    //     if(v.id === selectedId){
+    //         return {...v, title: value}
+    //     }
+    //     return v
+    //     }
+    // );
+
+    updateTodoById(selectedId, { title: value, complete: false });
+    console.log(todos);
+
+    closeEditModal();
+    tampilkanList();
 }
+
+// Function to update a to-do item by id
+function updateTodoById(id, newData) {
+    const index = todos.findIndex(todo => todo.id === id); // Find the index of the item by id
+    
+    if (index !== -1) {
+      // Update the item at the found index
+      todos[index] = { ...todos[index], ...newData }; // Merge old data with new data
+    }
+}
+
+
 function openDeleteModal(id) {
     const modal = document.getElementById("delete-modal");
     modal.style.display = "block";
     selectedId = id;
 }
+
+// delete data di array
 function deleteToDo() {
-    todo = todo.filter ((v)=> v.id !== selectedId)
+    todos = todos.filter ((v)=> v.id !== selectedId)
     //to do yg bukan mau dihpaus
     const elementToDo = document.getElementById(`todo-${selectedId}`)
     elementToDo.parentNode.removeChild(elementToDo);
     closeDeleteModal()
 }
+
 function closeDeleteModal(id) {
     const modal = document.getElementById("delete-modal");
     modal.style.display = "none";
