@@ -53,7 +53,8 @@ function add() {
 
 // Open the edit modal
 function openEditModal(id) {
-    const modal = document.getElementById("edit-modal");
+    // document.getElementById('edit-modal1').style.display = 'block';
+    const modal = document.getElementById("edit-modal1");
     modal.style.display = "block";
     const input = document.getElementById("edit-input");
     input.value = todos.find(todo => todo.id === id).title;
@@ -62,7 +63,7 @@ function openEditModal(id) {
 
 // Close the edit modal
 function closeEditModal() {
-    const modal = document.getElementById("edit-modal");
+    const modal = document.getElementById("edit-modal1");
     modal.style.display = "none";
     selectedId = null; // Clear selected ID after closing
 }
@@ -85,17 +86,36 @@ function submitEditModal() {
 
 // Open the delete confirmation modal
 function openDeleteModal(id) {
-    const modal = document.getElementById("delete-modal");
-    modal.style.display = "block";
-    selectedId = id; // Store the ID of the todo to be deleted
+    // const modal = document.getElementById("delete-modal");
+    // modal.style.display = "block";
+    selectedId = id; 
+
+    Swal.fire({
+        title: "Delete",
+        text: "Are you sure you want to delete this task?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            deleteToDo();
+          Swal.fire({
+            title: "Deleted!",
+            icon: "success"
+          });
+        }
+      });
+    // Store the ID of the todo to be deleted
 }
 
 // Close the delete modal
-function closeDeleteModal() {
-    const modal = document.getElementById("delete-modal");
-    modal.style.display = "none";
-    selectedId = null; // Clear selected ID after closing
-}
+// function closeDeleteModal() {
+//     const modal = document.getElementById("delete-modal");
+//     modal.style.display = "none";
+//     selectedId = null; // Clear selected ID after closing
+// }
 
 // Delete a todo
 function deleteToDo() {
@@ -110,6 +130,6 @@ function deleteToDo() {
         todoElement.remove();
     }
 
-    closeDeleteModal(); // Close the modal after deletion
+    
 }
 
