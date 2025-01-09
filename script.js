@@ -9,20 +9,22 @@ function add(){
     let li = document.createElement('li')
     li.id = `todo-${todo.length+1}`;
     li.innerHTML = `
-            <div class="todo-title">
-             ${value} 
-            </div>
-                <div class="todo-actions">
+            <div class="todo-item" id="">
+                    <div class="todo-content">
+                     ${value} 
+                    </div>
+                    <div class="todo-actions">
                         <button id="edit-btn" class="edit-btn" data-index="0" onclick="openEditModal(${todo.length+1})">
-                            edit<i class="fas fa-edit"></i>
+                            <i class="fas fa-edit"></i>
                         </button>
                         <button class="delete-btn" data-index="0" onclick="openDeleteModal(${todo.length+1})">
-                            delete<i class="fas fa-trash-alt"></i>
+                            <i class="fas fa-trash-alt"></i>
                         </button>
-            </div>
+                   </div>
+                </div>
             
     `
-    document.getElementById('list').appendChild(li)
+    document.getElementById('listTodo').appendChild(li)
     document.getElementById('input').value = ''
 
     li.addEventListener('click', function(){
