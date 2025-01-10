@@ -6,7 +6,7 @@ const btnEdit = document.getElementById("edit-btn");
 tampilkanList();
 // menampilkan list todo
 function tampilkanList() {
-    const listContainer = document.getElementById('listTodo');
+    const listContainer = document.getElementById('listTodo');  
     listContainer.innerHTML = ''; // menghapus, terus mensmpilkan lgi
     todos.forEach(todo =>  {
         let li = document.createElement('li');
@@ -30,7 +30,7 @@ function tampilkanList() {
         `;
 
         // ini checkboxes
-        const inputCheckbox = li.querySelector('.check-input');  // ambil checkbox di dalam  li
+        const inputCheckbox = li.querySelector('.check-input');  // ambil checkbox di dalam  li untk class dan id
         inputCheckbox.addEventListener('change', function() {
             let todoSpan = inputCheckbox.nextElementSibling; 
             todoSpan.classList.toggle('completed-text');  //di buatkan di css
@@ -41,7 +41,7 @@ function tampilkanList() {
         
         listContainer.appendChild(li);
 
-        li.addEventListener('click', function() {
+        li.addEventListener('click', function() { 
             li.classList.toggle('completed');
         });
     });
@@ -50,8 +50,10 @@ function tampilkanList() {
 // tamabah data
 function add() {
     let value = document.getElementById('input').value;
-    if (!value) return; 
+    if (!value) alert("inputan kosong"); 
+    // else if (todos.some(todo => todo.title === value)) alert('Title already exists');  
 
+else{
     let id = todos.length + 1; 
     let newToDo = {
         id: id,
@@ -63,6 +65,7 @@ function add() {
     tampilkanList(); 
     document.getElementById('input').value = ''; // clear input (setelah menginput, inputannya langsung kosong)
 }
+}
 
 // Open the edit modal
 function openEditModal(id) {
@@ -70,20 +73,21 @@ function openEditModal(id) {
     
     const editmodal = document.getElementById("edit-modal1");
     const modal = document.getElementById("modal-container");
-    modal.style.top = 0;
+    modal.style.top = 0; 
+    // top bg nya yg gelap
     editmodal.style.display = 'block';
     const input = document.getElementById("edit-input");
-    input.value = todos.find(todo => todo.id === id).title;
+    input.value = todos.find(todo => todo.id === id).title;  
     selectedId = id; 
+    // berdasrakan id 
 }
 
-// Close the edit modal
+// Close edit modal
 function closeEditModal() {
     const editmodal = document.getElementById("edit-modal1");
     const modal = document.getElementById("modal-container");
     modal.style.top = "";
     editmodal.style.display = 'none';
-    selectedId = null; 
 }
 
 // Submit the edited todo
@@ -91,13 +95,12 @@ function submitEditModal() {
     let newValue = document.getElementById('edit-input').value;
     if (!newValue) return; 
 
-    // Update the todo in the array
+    // berhasil di submit
     const todoIndex = todos.findIndex(todo => todo.id === selectedId);
     if (todoIndex !== -1) {
         todos[todoIndex].title = newValue; 
     }
 
-    // Re-render the list
     tampilkanList();
     closeEditModal(); // Close  modal
 }
@@ -110,11 +113,12 @@ function openDeleteModal(id) {
     Swal.fire({
         title: "Hapus",
         text: "Apakah Anda yakin ingin menghapus tugas ini?",
-        icon: "warning",
+        // icon: "warning",
         showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Hapus"
+        confirmButtonColor: "#d33",
+        cancelButtonColor: "#3085d6",
+        confirmButtonText: "Hapus",
+        cancelButtonText: "Batal"
       }).then((result) => {
         if (result.isConfirmed) {
             deleteToDo();
@@ -125,21 +129,9 @@ function openDeleteModal(id) {
         }
       });  
 }
-// Close the delete modal
-    // function closeDeleteModal() {
-    //     const modal = document.getElementById("delete-modal");
-    //     modal.style.display = "none";
-    //     selectedId = null; // Clear selected ID after closing
-    // }
-
-// Delete a todo
 function deleteToDo() {
     if (selectedId === null) return;
 
-    // Remove the todo from the array
-    todos = todos.filter(todo => todo.id !== selectedId);
-
-    // Remove the todo from the DOM
     const todoElement = document.getElementById(`todo-${selectedId}`);
     if (todoElement) {
         todoElement.remove();
@@ -159,3 +151,12 @@ document.getElementById('edit-input').addEventListener('keypress', (e) => {
         submitEditModal();
     }
 });
+
+
+
+
+                                    // function closeDeleteModal() {
+                                    //     const modal = document.getElementById("delete-modal");
+                                    //     modal.style.display = "none";
+                                    //     selectedId = null; // Clear selected ID after closing
+                                    // }
