@@ -14,8 +14,8 @@ function tampilkanList() {
         li.innerHTML = `
             <div class="todo-item">
                 <div class="todo-content">
-                    <input type="checkbox" id="check-${todo.id}" class="check-input"> 
-                    <span>${todo.title}</span>
+                    <input type="checkbox" id="check-${todo.id}" class="check-input" ${todo.complete ? 'checked' : ''}> 
+                    <span class="${todo.complete ? 'completed-text' : ''}">${todo.title}</span>
 
                 </div>
                 <div class="todo-actions">
@@ -34,6 +34,8 @@ function tampilkanList() {
         inputCheckbox.addEventListener('change', function() {
             let todoSpan = inputCheckbox.nextElementSibling; 
             todoSpan.classList.toggle('completed-text');  //di buatkan di css
+            todos.find(v => v.id === todo.id).complete = inputCheckbox.checked;  // simpan di array todos
+
         });
         // end checkboxes
         
@@ -65,8 +67,11 @@ function add() {
 // Open the edit modal
 function openEditModal(id) {
     // document.getElementById('edit-modal1').style.display = 'block';
-    const modal = document.getElementById("edit-modal1");
-    modal.style.display = "block";
+    
+    const editmodal = document.getElementById("edit-modal1");
+    const modal = document.getElementById("modal-container");
+    modal.style.top = 0;
+    editmodal.style.display = 'block';
     const input = document.getElementById("edit-input");
     input.value = todos.find(todo => todo.id === id).title;
     selectedId = id; 
@@ -74,8 +79,10 @@ function openEditModal(id) {
 
 // Close the edit modal
 function closeEditModal() {
-    const modal = document.getElementById("edit-modal1");
-    modal.style.display = "none";
+    const editmodal = document.getElementById("edit-modal1");
+    const modal = document.getElementById("modal-container");
+    modal.style.top = "";
+    editmodal.style.display = 'none';
     selectedId = null; 
 }
 
@@ -138,3 +145,17 @@ function deleteToDo() {
         todoElement.remove();
     }
 }
+
+// enter tambah data
+input.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        add();
+
+    }
+});
+// enter update stlh edit
+document.getElementById('edit-input').addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        submitEditModal();
+    }
+});
