@@ -100,6 +100,9 @@ input {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    word-wrap: break-word;  /* otomatis ke bawah katanya */
+    overflow-wrap: break-word; 
+    white-space: normal; 
   }
   
 .todo-item:hover {
@@ -118,13 +121,25 @@ input {
     display: flex; 
     align-items: center;
 }
+span {
+  width: 200px;
+  display: inline-block;  /*agar katanya ke bawah */
+}
+
 .todo-actions {
     display: flex;
     gap: 8px;
 }
+
 /* checkbox */
+.check-input:checked{
+  color: aquamarine;
+}
+
 .completed-text{
+  /*setelah di klik checkbox tulisannya seperti ini*/
   text-decoration: line-through;
+  font-style: italic;
 }
 
 /* Button styles */

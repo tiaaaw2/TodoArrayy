@@ -33,7 +33,7 @@ function tampilkanList() {
         const inputCheckbox = li.querySelector('.check-input');  // ambil checkbox di dalam  li
         inputCheckbox.addEventListener('change', function() {
             let todoSpan = inputCheckbox.nextElementSibling; 
-            todoSpan.classList.toggle('completed-text');  
+            todoSpan.classList.toggle('completed-text');  //di buatkan di css
         });
         // end checkboxes
         
@@ -48,17 +48,17 @@ function tampilkanList() {
 // tamabah data
 function add() {
     let value = document.getElementById('input').value;
-    if (!value) return; // Prevent adding empty todo
+    if (!value) return; 
 
-    let id = todos.length + 1; // Simple ID generation
+    let id = todos.length + 1; 
     let newToDo = {
         id: id,
         title: value,
         complete: false
     };
 
-    todos.push(newToDo); // Save in array
-    tampilkanList(); // Re-render the list
+    todos.push(newToDo); 
+    tampilkanList(); 
     document.getElementById('input').value = ''; // clear input (setelah menginput, inputannya langsung kosong)
 }
 
@@ -69,68 +69,65 @@ function openEditModal(id) {
     modal.style.display = "block";
     const input = document.getElementById("edit-input");
     input.value = todos.find(todo => todo.id === id).title;
-    selectedId = id; // Store the selected ID for editing
+    selectedId = id; 
 }
 
 // Close the edit modal
 function closeEditModal() {
     const modal = document.getElementById("edit-modal1");
     modal.style.display = "none";
-    selectedId = null; // Clear selected ID after closing
+    selectedId = null; 
 }
 
 // Submit the edited todo
 function submitEditModal() {
     let newValue = document.getElementById('edit-input').value;
-    if (!newValue) return; // Don't allow empty input
+    if (!newValue) return; 
 
     // Update the todo in the array
     const todoIndex = todos.findIndex(todo => todo.id === selectedId);
     if (todoIndex !== -1) {
-        todos[todoIndex].title = newValue; // Update the title
+        todos[todoIndex].title = newValue; 
     }
 
     // Re-render the list
     tampilkanList();
-    closeEditModal(); // Close the modal
+    closeEditModal(); // Close  modal
 }
 
-// Open the delete confirmation modal
 function openDeleteModal(id) {
     // const modal = document.getElementById("delete-modal");
     // modal.style.display = "block";
     selectedId = id; 
 
     Swal.fire({
-        title: "Delete",
-        text: "Are you sure you want to delete this task?",
+        title: "Hapus",
+        text: "Apakah Anda yakin ingin menghapus tugas ini?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Hapus"
       }).then((result) => {
         if (result.isConfirmed) {
             deleteToDo();
           Swal.fire({
-            title: "Deleted!",
+            title: "Hapus!",
             icon: "success"
           });
         }
-      });
-    // Store the ID of the todo to be deleted
+      });  
 }
-
 // Close the delete modal
-// function closeDeleteModal() {
-//     const modal = document.getElementById("delete-modal");
-//     modal.style.display = "none";
-//     selectedId = null; // Clear selected ID after closing
-// }
+    // function closeDeleteModal() {
+    //     const modal = document.getElementById("delete-modal");
+    //     modal.style.display = "none";
+    //     selectedId = null; // Clear selected ID after closing
+    // }
 
 // Delete a todo
 function deleteToDo() {
-    if (selectedId === null) return; // If no ID is selected, do nothing
+    if (selectedId === null) return;
 
     // Remove the todo from the array
     todos = todos.filter(todo => todo.id !== selectedId);
@@ -140,7 +137,4 @@ function deleteToDo() {
     if (todoElement) {
         todoElement.remove();
     }
-
-
 }
-
