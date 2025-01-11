@@ -10,8 +10,8 @@ function tampilkanList() {
     todos.forEach(todo =>  {
         let li = document.createElement('li');
         li.id = `todo-${todo.id}`;
-        console.log(li);
-        console.log(li.innerHTML);
+        // console.log(li);
+        // console.log(li.innerHTML);
         li.innerHTML = `
             <div class="todo-item">
                 <div class="todo-content">
@@ -31,17 +31,15 @@ function tampilkanList() {
         `;
 
         // ini checkboxes
-        const inputCheckbox = li.querySelector('.check-input');  // ambil checkbox di dalam  li untk class dan id
+        const inputCheckbox = li.querySelector('.check-input');  
         inputCheckbox.addEventListener('change', function() {
             let todoSpan = inputCheckbox.nextElementSibling; 
-            todoSpan.classList.toggle('completed-text');  //di buatkan di css
-            todos.find(v => v.id === todo.id).complete = inputCheckbox.checked;  // simpan di array todos
-                //plh brdsrkn id
+            todoSpan.classList.toggle('completed-text');  
+            todos.find(v => v.id === todo.id).complete = inputCheckbox.checked;  
         });
         // end checkboxes
         
         listContainer.appendChild(li);
-
         li.addEventListener('click', function() { 
             li.classList.toggle('completed');
         });
@@ -60,26 +58,34 @@ else{
         title: value,
         complete: false
     };
-
     todos.push(newToDo); 
     tampilkanList(); 
-    document.getElementById('input').value = ''; // clear input (setelah menginput, inputannya langsung kosong)
-}
+    document.getElementById('input').value = '';
+    }
 }
 
 // Open the edit modal
 function openEditModal(id) {
-    // document.getElementById('edit-modal1').style.display = 'block';
-    
     const editmodal = document.getElementById("edit-modal1");
     const modal = document.getElementById("modal-container");
     modal.style.top = "0"; 
-    // top bg nya yg gelap
     editmodal.style.display = "block";
     const input = document.getElementById("edit-input");
     input.value = todos.find(todo => todo.id === id).title;  
     selectedId = id; 
-    // berdasrakan id 
+}
+
+function submitEditModal() {
+    let newValue = document.getElementById('edit-input').value;
+    if (!newValue) return; 
+
+    const todoIndex = todos.findIndex(todo => todo.id === selectedId);
+    if (todoIndex !== -1) {
+        todos[todoIndex].title = newValue; 
+    }
+
+    tampilkanList();
+    closeEditModal(); 
 }
 
 // Close edit modal
@@ -88,21 +94,6 @@ function closeEditModal() {
     const modal = document.getElementById("modal-container");
     modal.style.top = "";
     editmodal.style.display = 'none';
-}
-
-// Submit the edited todo
-function submitEditModal() {
-    let newValue = document.getElementById('edit-input').value;
-    if (!newValue) return; 
-
-    // berhasil di submit
-    const todoIndex = todos.findIndex(todo => todo.id === selectedId);
-    if (todoIndex !== -1) {
-        todos[todoIndex].title = newValue; 
-    }
-
-    tampilkanList();
-    closeEditModal(); // Close  modal
 }
 
 function openDeleteModal(id) {
@@ -114,7 +105,16 @@ function openDeleteModal(id) {
     selectedId = id;  
     tampilkanList();
 }
+function deleteToDo() {
+    if (selectedId === null) return;
 
+    const hapus = document.getElementById(`todo-${selectedId}`);
+    if (hapus) {
+        hapus.remove();
+    }
+    todos = todos.filter(todo => todo.id !== selectedId);
+    closeDeleteModal(); 
+}
 function closeDeleteModal(){
     const modal = document.getElementById("delete-modal");
     const modalContainer = document.getElementById("modal-container");
@@ -122,21 +122,6 @@ function closeDeleteModal(){
     modalContainer.style.top = "";
     selectedId = null; 
 }
-
-function deleteToDo() {
-    if (selectedId === null) return;
-
-    // agar yg sudh di hapus hilang di tampilan
-    const hapus = document.getElementById(`todo-${selectedId}`);
-    if (hapus) {
-        hapus.remove();
-    }
-    // agar yg sdh di hapus tdk muncul lagi di tampilan saat membuat baru
-    todos = todos.filter(todo => todo.id !== selectedId);
-    closeDeleteModal(); 
-    
-}
-
 // enter tambah data
 input.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -144,7 +129,6 @@ input.addEventListener('keypress', (e) => {
 
     }
 });
-// enter update stlh edit
 document.getElementById('edit-input').addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
         submitEditModal();
