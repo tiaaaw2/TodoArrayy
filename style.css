@@ -1,3 +1,5 @@
+
+
 * {
     margin: 0;
     padding: 0;
@@ -187,11 +189,8 @@ span {
 .modal-container{
   background-color: rgba(0, 0, 0, 0.3);
   position: fixed;
-  height: 100%;
-  width: 100%;
-
-  /* top: 0; */
-  
+  height: 100%; 
+  width: 100%;  
 }
 .popup-content {
   top: 0;
@@ -251,7 +250,7 @@ span {
 }
 
 /* Edit modal */
-#edit-modal1 {
+#edit-modal1, #delete-modal {
   display: none;
   position: fixed;
   top: 50%;
@@ -351,7 +350,7 @@ p {
 }
 
 /* Latar belakang overlay */
-.modal-overlay1 {
+/* .modal-overlay1 {
   display: none;
   position: fixed;
   top: 0;
@@ -360,4 +359,4 @@ p {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
-}
+} */

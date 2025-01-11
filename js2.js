@@ -1,17 +1,16 @@
 const input = document.getElementById("input");
-let todos = []; 
+let todos = []; //menampung nilainya
 let selectedId = null;
 const btnEdit = document.getElementById("edit-btn");
 
 tampilkanList();
 function tampilkanList() {
     const listContainer = document.getElementById('listTodo');  
-    listContainer.innerHTML = ''; 
+    listContainer.innerHTML = ''; // menghapus, terus menampilkan lgi
     todos.forEach(todo =>  {
         let li = document.createElement('li');
         li.id = `todo-${todo.id}`;
-        console.log(li);
-        console.log(li.innerHTML);
+        // manipulasi a
         li.innerHTML = `
             <div class="todo-item">
                 <div class="todo-content">
@@ -106,23 +105,15 @@ function submitEditModal() {
 }
 
 function openDeleteModal(id) {
-    const modal = document.getElementById("delete-modal");
-    const modalContainer = document.getElementById("modal-container");
-    modal.style.display = "block"; 
-    modalContainer.style.top = "0"; 
-    input.value = todos.find(todo => todo.id === id).title;  
-    selectedId = id;  
-    tampilkanList();
+    // const modal = document.getElementById("delete-modal");
+    // modal.style.display = "block";
+    selectedId = id; 
+    if (confirm("apakah anda yakin ingin menghapus tugas ini?")) {
+        deleteToDo();
+        closeDeleteModal();
+    }
+  
 }
-
-function closeDeleteModal(){
-    const modal = document.getElementById("delete-modal");
-    const modalContainer = document.getElementById("modal-container");
-    modal.style.display = "none";
-    modalContainer.style.top = "";
-    selectedId = null; 
-}
-
 function deleteToDo() {
     if (selectedId === null) return;
 
@@ -132,8 +123,7 @@ function deleteToDo() {
         hapus.remove();
     }
     // agar yg sdh di hapus tdk muncul lagi di tampilan saat membuat baru
-    todos = todos.filter(todo => todo.id !== selectedId);
-    closeDeleteModal(); 
+    todos = todos.filter(todo => todo.id !== selectedId); 
     
 }
 
@@ -156,21 +146,3 @@ document.getElementById('edit-input').addEventListener('keypress', (e) => {
                                     //     modal.style.display = "none";
                                     //     selectedId = null; // Clear selected ID after closing
                                     // }
-                                    // Swal.fire({
-                                    //     title: "Hapus",
-                                    //     text: "Apakah Anda yakin ingin menghapus tugas ini?",
-                                    //     // icon: "warning",
-                                    //     showCancelButton: true,
-                                    //     confirmButtonColor: "#d33",
-                                    //     cancelButtonColor: "#3085d6",
-                                    //     confirmButtonText: "Hapus",
-                                    //     cancelButtonText: "Batal"
-                                    //   }).then((result) => {
-                                    //     if (result.isConfirmed) {
-                                    //         deleteToDo();
-                                    //       Swal.fire({
-                                    //         title: "Hapus!",
-                                    //         icon: "warning"
-                                    //       });
-                                    //     }
-                                    //   }); 

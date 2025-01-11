@@ -28,7 +28,9 @@
         <div class="todos-wrapper">
             <h3 class="todos-title">To-Do List Anda</h3>
             <div class="todos-container">
-                <div id="listTodo"></div>
+                <div id="listTodo">
+                            
+                </div>            
             </div>
         </div>
     </div>
@@ -36,22 +38,20 @@
     <!-- Modal Container -->
     <div class="modal-container" id="modal-container">
         <!-- Modal Edit -->
-     
         <div class="popup-content" id="edit-modal1">
             <button class="close-btn" onclick="closeEditModal()">&#10006;</button>
             <h3 class="edit-title">Edit</h3>
             <input type="text" id="edit-input" placeholder="Edit your task">
             <button class="popup-edit" onclick="submitEditModal()">Submit</button>
         </div> 
-
         <!-- Modal Delete -->
-        <!-- <div class="popup-content" id="delete-modal">
+        <div class="popup-content" id="delete-modal">
             <button class="close-btn" onclick="closeDeleteModal()">&#10006;</button>
-            <h3 class="delete-title">Delete</h3>
-            <p>Are you sure you want to delete this task?</p>
-            <button class="modal-delete" onclick="deleteToDo()">Delete</button>
-            <button class="modal-cancel" onclick="closeDeleteModal()">Cancel</button>
-        </div> -->
+            <h3 class="delete-title">Hapus</h3>
+            <p>Apakah anda yakin ingin menghapus tugas ini?</p>
+            <button class="modal-delete" onclick="deleteToDo()">Hapus</button>
+            <button class="modal-cancel" onclick="closeDeleteModal()">Batal</button>
+        </div>
     </div>
 
     <script src="script-tes.js"></script>
